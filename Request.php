@@ -1544,6 +1544,10 @@ class Request
             throw new JsonException('Could not decode request body.', $e->getCode(), $e);
         }
 
+        if (null === $content) {
+            return new InputBag([]);
+        }
+
         if (!\is_array($content)) {
             throw new JsonException(sprintf('JSON content was expected to decode to an array, "%s" returned.', get_debug_type($content)));
         }
